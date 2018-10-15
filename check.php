@@ -1,6 +1,6 @@
 <?php
 
-        session_start(); // starts a new session
+        /*session_start(); // starts a new session
     
         require "vendor/autoload.php"; // Connect to autoload.php package - It is a package from composer that specifies that a class is only loaded when                                   it is needed. Instead of specifying all the classes on top of the script, so they will be loaded at each                                         request.
     
@@ -100,7 +100,23 @@
 
         $red2 = $properties->info()['dominantColors']['colors'][1]['color']['red'];
         $green2 = $properties->info()['dominantColors']['colors'][1]['color']['green'];
-        $blue2 = $properties->info()['dominantColors']['colors'][1]['color']['blue'];
+        $blue2 = $properties->info()['dominantColors']['colors'][1]['color']['blue'];*/
+
+        // Since my Google Vision API project is disabled at the moment, I am using these values for the variables until it gets reactivated or I create a new project
+
+        $photo = fopen($_FILES['image']['tmp_name'], 'r');
+        $imagetoken = "yourimage";
+        move_uploaded_file($_FILES['image']['tmp_name'], __DIR__ . '/uploads/' . $imagetoken . ".jpg");
+
+        $dominantEmotion = "NEUTRAL";
+
+        $red1 = 255;
+        $green1 = 0;
+        $blue1 = 0;
+
+        $red2 = 0;
+        $green2 = 0;
+        $blue2 = 255;
 
 ?>
 
@@ -113,12 +129,32 @@
 </head>    
 	
     <body class = "bg">
-        <div class = "imagecontainer" style = "max-width: 1080px;">            
-                    <img src = "uploads/yourimage.jpg" alt = "yourimage" style = "max-width: 500px">             
-         
-        
-        
+        <h1><?php echo $dominantEmotion ?></h1>
+        <div class = "imagecontainer">            
+            <img src = "uploads/yourimage.jpg" alt = "yourimage">         
         </div>
+        
+    <script>
+        // Setting the colour of the image frame division
+            var pageBackground = document.querySelector('.bg');
+            pageBackground.setAttribute("style", "background-color: rgba(<?php echo $red2 ?>, <?php echo $green2 ?>, <?php echo $blue2 ?>, 1)")
+            var imageFrame = document.querySelector('.imagecontainer');
+            imageFrame.setAttribute("style", "border: 5px solid rgba(<?php echo $red1 ?>, <?php echo $green1 ?>, <?php echo $blue1 ?>, 1)");
+        
+        // Setting the colour of the actual image border  
+            var image = document.querySelector ('img');
+            var imageEmotion = "<?php echo $dominantEmotion ?>";
+            if (imageEmotion == "JOY") {
+                image.setAttribute("style", "border: 3px solid #F7FE2E");
+            } else if (imageEmotion == "ANGER") {
+                image.setAttribute("style", "border: 3px solid #FF0000");
+            } else if (imageEmotion == "SORROW") {
+                image.setAttribute("style", "border: 3px solid #00FFFF");
+            } else {
+                image.setAttribute("style", "border: 3px solid #A4A4A4");
+            }
+        
+    </script>    
         
     </body>
      
