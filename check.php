@@ -100,15 +100,46 @@
 
         $red2 = $properties->info()['dominantColors']['colors'][1]['color']['red'];
         $green2 = $properties->info()['dominantColors']['colors'][1]['color']['green'];
-        $blue2 = $properties->info()['dominantColors']['colors'][1]['color']['blue'];*/
+        $blue2 = $properties->info()['dominantColors']['colors'][1]['color']['blue'];
+        
+        $red3 = $properties->info()['dominantColors']['colors'][2]['color']['red'];
+        $green3 = $properties->info()['dominantColors']['colors'][2]['color']['green'];
+        $blue3 = $properties->info()['dominantColors']['colors'][2]['color']['blue'];*/
 
         // Since my Google Vision API project is disabled at the moment, I am using these values for the variables until it gets reactivated or I create a new project
 
         $photo = fopen($_FILES['image']['tmp_name'], 'r');
         $imagetoken = "yourimage";
-        move_uploaded_file($_FILES['image']['tmp_name'], __DIR__ . '/uploads/' . $imagetoken . ".jpg");
 
-        $dominantEmotion = "NEUTRAL";
+        $target_dir = "uploads/";
+        $target_file = $target_dir . "yourimage" . ".JPG";
+        $uploadOk = 1;        
+        $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+
+        // Existing files are overwritten   
+
+        // Check file size
+        if ($_FILES['image']/*['tmp_name']*/["size"] > 500000) {
+            echo "<p>Sorry, your file is too large.</p>";
+            $uploadOk = 0;
+        }
+
+        // Allow certain file formats
+        if($imageFileType != "jpg") {
+            echo "<p>Sorry, only JPG files are allowed.</p>";
+            $uploadOk = 0;
+        }
+
+        // Check if $uploadOk is set to 0 by an error
+        if ($uploadOk == 0) {
+            echo "<p>Sorry, your file was not uploaded.</p>";
+            // if everything is ok, try to upload file
+        } else {
+            move_uploaded_file($_FILES['image']['tmp_name'], __DIR__ . '/uploads/' . $imagetoken . ".jpg");
+        }
+        
+
+        $dominantEmotion = "SORROW";
 
         $red1 = 255;
         $green1 = 0;
@@ -125,34 +156,100 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Cloud Vision Demo</title>
-    <link rel = "stylesheet" href = "stylesheet.css">    
+    <link rel = "stylesheet" href = "stylesheet2.css">    
 </head>    
 	
     <body class = "bg">
-        <h1><?php echo $dominantEmotion ?></h1>
-        <div class = "imagecontainer">            
-            <img src = "uploads/yourimage.jpg" alt = "yourimage">         
+        <div class = "graphiccontainer">
+            <?php
+                if ($dominantEmotion == "JOY") {
+                    include "joy.php";
+                } elseif ($dominantEmotion == "ANGER") {
+                    include "anger.php";
+                } elseif ($dominantEmotion == "SORROW") {
+                    include "sorrow.php";
+                } else {
+                    include "neutral.php";
+                }                
+            ?>         
+                                    
+            <div class = "resultcontainer">                
+                <div class = "imagecontainer">            
+                    <img src = "uploads/yourimage.jpg" alt = "yourimage">         
+                </div>                
+                 <a class = "reupload" href = "index.php">Reupload</a>                
+            </div>
+            
+            
         </div>
         
-    <script>
-        // Setting the colour of the image frame division
-            var pageBackground = document.querySelector('.bg');
-            pageBackground.setAttribute("style", "background-color: rgba(<?php echo $red2 ?>, <?php echo $green2 ?>, <?php echo $blue2 ?>, 1)")
-            var imageFrame = document.querySelector('.imagecontainer');
-            imageFrame.setAttribute("style", "border: 5px solid rgba(<?php echo $red1 ?>, <?php echo $green1 ?>, <?php echo $blue1 ?>, 1)");
+    <script src = "anime.js"></script>    
         
-        // Setting the colour of the actual image border  
-            var image = document.querySelector ('img');
-            var imageEmotion = "<?php echo $dominantEmotion ?>";
-            if (imageEmotion == "JOY") {
-                image.setAttribute("style", "border: 3px solid #F7FE2E");
-            } else if (imageEmotion == "ANGER") {
-                image.setAttribute("style", "border: 3px solid #FF0000");
-            } else if (imageEmotion == "SORROW") {
-                image.setAttribute("style", "border: 3px solid #00FFFF");
-            } else {
-                image.setAttribute("style", "border: 3px solid #A4A4A4");
-            }
+    <script>
+        
+        
+// ----------------------------------------------------------- Setting the colour of the page background -------------------------------------------
+        
+        var pageBackground = document.querySelector('.bg');
+        pageBackground.setAttribute("style", "background-color: rgba(<?php echo $red2 ?>, <?php echo $green2 ?>, <?php echo $blue2 ?>, 1)") 
+        
+        
+// ----------------------------------------------------------- JS variable for the dominant emotion ------------------------------------------------
+        
+        var image = document.querySelector ('img');
+        var imageEmotion = "<?php echo $dominantEmotion ?>";
+        console.log(imageEmotion);
+        
+// ------------------------------------------------------------ Animating the background graphic ---------------------------------------------------
+        
+    // -------------------------------------------------------- JOY ---------------------------------------------------------------------------
+        
+        if (imageEmotion == "JOY") {
+            
+            var joyGraphic = document.querySelector('#joygraphic');            
+            joyGraphic.setAttribute("style", "visibility: visible; stroke: rgba( <?php echo $red1 ?>, <?php echo $green1 ?>, <?php echo $blue1 ?>, 1); height: 100%");
+            
+            
+            /*var joyPathEls = document.querySelectorAll('#joygraphic path');
+            
+            for (var i = 0; i < joyPathEls.length; i++) {
+                var joyPathEl = joyPathEls[i];
+                //var offset = anime.setDashoffset(joyPathEl);
+                //joyPathEl.setAttribute('stroke-dashoffset', offset);
+                        
+                var joyLineDrawing = anime({
+                  targets: 'joyPathEl',
+                  // strokeDashoffset: [offset, 0],
+                    strokeDashoffset: [anime.setDashoffset, 0],
+                  easing: 'easeInOutSine',
+                  duration: anime.random(1000, 3000),
+                  delay: anime.random(0, 2000),                            
+                  loop: false
+                });
+            }*/
+            
+        }
+            
+            
+    // -------------------------------------------------------- ANGER -------------------------------------------------------------------------
+            
+        else if (imageEmotion == "ANGER") {
+            var angerGraphic = document.querySelector('#angergraphic');            
+            angerGraphic.setAttribute("style", "visibility: visible; fill: rgba( <?php echo $red1 ?>, <?php echo $green1 ?>, <?php echo $blue1 ?>, 1); height: 100%");
+        }    
+    // -------------------------------------------------------- SORROW ------------------------------------------------------------------------
+            
+        else if (imageEmotion == "SORROW") {
+            var sorrowGraphic = document.querySelector('#sorrowgraphic');            
+            sorrowGraphic.setAttribute("style", "visibility: visible; fill: rgba( <?php echo $red1 ?>, <?php echo $green1 ?>, <?php echo $blue1 ?>, 1); height: 100vh");
+        } 
+            
+    // -------------------------------------------------------- NEUTRAL -----------------------------------------------------------------------
+            
+        else {
+            var neutralGraphic = document.querySelector('#neutralgraphic');            
+            neutralGraphic.setAttribute("style", "visibility: visible; stroke: rgba( <?php echo $red1 ?>, <?php echo $green1 ?>, <?php echo $blue1 ?>, 1); height: 100%");
+        }
         
     </script>    
         

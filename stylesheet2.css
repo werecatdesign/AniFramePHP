@@ -1,0 +1,61 @@
+body, html {
+    height: 100vh;
+    margin: auto;
+}
+
+.bg {
+    background-color: #ffffff;    
+    text-align: center;
+    
+}
+
+.graphiccontainer {
+    position: relative;
+    max-height: 100vh;    
+}
+
+svg {
+    visibility: hidden;
+    height: 0; 
+    margin: auto;
+}
+
+#joygraphic, #neutralgraphic {
+    fill: none;    
+    stroke-width: 2vh;
+    visibility: hidden;
+}
+
+#angergraphic, #neutralgraphic {
+    fill: none;    
+    stroke: none;
+    visibility: hidden;
+}
+
+.resultcontainer {    
+    display: inline-block;
+    position: absolute; 
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding-top: 5vh;
+    max-height: 100vh;
+}
+
+
+img {
+    max-width: 75vw;
+    max-height: 80vh;
+}
+
+.reupload {    
+    width: 20vh;    
+    background-color: #ffffff;
+    display: inline-block;
+    margin-top: 3vh;
+    padding: 0;  
+    font-size: 5vh; 
+    text-decoration: none;
+    color: #000000; 
+    padding: 1vh;
+}
