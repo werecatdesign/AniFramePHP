@@ -139,7 +139,7 @@
         }
         
 
-        $dominantEmotion = "SORROW";
+        $dominantEmotion = "NEUTRAL";
 
         $red1 = 255;
         $green1 = 0;
@@ -148,6 +148,10 @@
         $red2 = 0;
         $green2 = 0;
         $blue2 = 255;
+
+        $red3 = 0;
+        $green3 = 255;
+        $blue3 = 0;
 
 ?>
 
@@ -206,27 +210,30 @@
         
         if (imageEmotion == "JOY") {
             
-            var joyGraphic = document.querySelector('#joygraphic');            
-            joyGraphic.setAttribute("style", "visibility: visible; stroke: rgba( <?php echo $red1 ?>, <?php echo $green1 ?>, <?php echo $blue1 ?>, 1); height: 100%");
+            var joyGraphic = document.querySelector('#joygraphic'); 
+            joyGraphic.setAttribute("style", "height: 100%");            
             
+            var lineTime = 1000; // 1 second duration of each animation
             
-            /*var joyPathEls = document.querySelectorAll('#joygraphic path');
-            
-            for (var i = 0; i < joyPathEls.length; i++) {
-                var joyPathEl = joyPathEls[i];
-                //var offset = anime.setDashoffset(joyPathEl);
-                //joyPathEl.setAttribute('stroke-dashoffset', offset);
-                        
-                var joyLineDrawing = anime({
-                  targets: 'joyPathEl',
-                  // strokeDashoffset: [offset, 0],
-                    strokeDashoffset: [anime.setDashoffset, 0],
-                  easing: 'easeInOutSine',
-                  duration: anime.random(1000, 3000),
-                  delay: anime.random(0, 2000),                            
-                  loop: false
-                });
-            }*/
+            var joyLineDrawing = anime ({
+                targets: "path", // all elements of the type 'path' are targeted. Since only one graphic is included, this works.
+                strokeDashoffset: [anime.setDashoffset, 0], // no dashoffset so the line is not dotted
+                easing: 'easeInOutQuad', // easing: at the beginning and the end a bit slower, in the middle a bit faster
+                duration: lineTime, // each path takes 1 second to be drawn
+                delay: function (el, i) { 
+                    return lineTime * i; // each path animation has the delay of all previous path animations, so that all are played one after another
+                },
+                begin: function(anim) {
+                    var branches = document.querySelectorAll("path"), i; // an array containing all paths - the branches of the drawn plant
+                    
+                    for (i=0; i<branches.length; i++) { // here the appearance of the branches is specified as they are hidden in the beginning
+                        branches[i].setAttribute("visibility", "visible");
+                        branches[i].setAttribute("stroke", "rgba( <?php echo $red1 ?>, <?php echo $green1 ?>, <?php echo $blue1 ?>, 1)");
+                        branches[i].setAttribute("fill", "none");
+                    }
+                },
+                autoplay: true // specifies that the animation will be triggered as soon as the page is loaded - played automatically
+            })
             
         }
             
@@ -236,19 +243,182 @@
         else if (imageEmotion == "ANGER") {
             var angerGraphic = document.querySelector('#angergraphic');            
             angerGraphic.setAttribute("style", "visibility: visible; fill: rgba( <?php echo $red1 ?>, <?php echo $green1 ?>, <?php echo $blue1 ?>, 1); height: 100%");
+            
+            
+            var path1 = anime.path('#path1');
+            var path2 = anime.path('#path2');
+            var path3 = anime.path('#path3');
+            var path4 = anime.path('#path4');
+            var path5 = anime.path('#path5');
+            var path6 = anime.path('#path6');
+            var lineTime = 5000; // 5 seconds duration of each animation
+
+            
+                var motionPath1 = anime({
+                  targets: '#lightning1',                      
+                  translateX: path1('x'),
+                  translateY: path1('y'),                                    
+                  duration: lineTime,                    
+                  elasticity: 2000,
+                  loop: false
+                });
+            
+                var motionPath2 = anime({
+                  targets: '#lightning2',                      
+                  translateX: path2('x'),
+                  translateY: path2('y'),                                    
+                  duration: lineTime,                  
+                  elasticity: 2000,
+                  loop: false
+                });
+            
+                var motionPath3 = anime({
+                  targets: '#lightning3',                      
+                  translateX: path3('x'),
+                  translateY: path3('y'),                                    
+                  duration: lineTime,                  
+                  elasticity: 2000,
+                  loop: false
+                });
+            
+                var motionPath4 = anime({
+                  targets: '#lightning4',                      
+                  translateX: path4('x'),
+                  translateY: path4('y'),                                    
+                  duration: lineTime,                  
+                  elasticity: 2000,
+                  loop: false
+                });
+            
+                var motionPath5 = anime({
+                  targets: '#lightning5',                      
+                  translateX: path5('x'),
+                  translateY: path5('y'),                                    
+                  duration: lineTime,                  
+                  elasticity: 2000,
+                  loop: false
+                });
+           
+                var motionPath6 = anime({
+                  targets: '#lightning6',                      
+                  translateX: path6('x'),
+                  translateY: path6('y'),                                    
+                  duration: lineTime,                  
+                  elasticity: 2000,
+                  loop: false
+                });
+            
         }    
     // -------------------------------------------------------- SORROW ------------------------------------------------------------------------
             
         else if (imageEmotion == "SORROW") {
             var sorrowGraphic = document.querySelector('#sorrowgraphic');            
-            sorrowGraphic.setAttribute("style", "visibility: visible; fill: rgba( <?php echo $red1 ?>, <?php echo $green1 ?>, <?php echo $blue1 ?>, 1); height: 100vh");
+            sorrowGraphic.setAttribute("style", "visibility: visible; height: 100vh; fill: rgba( <?php echo $red1 ?>, <?php echo $green1 ?>, <?php echo $blue1 ?>, 0)");
+            
+            var pathleft = anime.path('#pathleft');
+            var pathright = anime.path('#pathright');
+            var lineTime = 8000;
+            
+            var motionPathLeft = anime({
+                  targets: '.cloudleft',                      
+                  translateX: pathleft('x'),
+                  translateY: pathleft('y'),
+                  fill: [{value: 'rgba( <?php echo $red1 ?>, <?php echo $green1 ?>, <?php echo $blue1 ?>, 1)'}],
+                  duration: lineTime,                  
+                  easing: 'easeOutCubic',
+                  loop: false
+                });
+            
+            var motionPathLeft = anime({
+                  targets: '.cloudright',                      
+                  translateX: pathright('x'),
+                  translateY: pathright('y'),
+                  fill: [{value: 'rgba( <?php echo $red1 ?>, <?php echo $green1 ?>, <?php echo $blue1 ?>, 1)'}],
+                  duration: lineTime,                  
+                  easing: 'easeOutCubic',
+                  loop: false
+                });
+            
+            
         } 
             
     // -------------------------------------------------------- NEUTRAL -----------------------------------------------------------------------
             
         else {
             var neutralGraphic = document.querySelector('#neutralgraphic');            
-            neutralGraphic.setAttribute("style", "visibility: visible; stroke: rgba( <?php echo $red1 ?>, <?php echo $green1 ?>, <?php echo $blue1 ?>, 1); height: 100%");
+            neutralGraphic.setAttribute("style", "visibility: visible; fill: rgba( <?php echo $red1 ?>, <?php echo $green1 ?>, <?php echo $blue1 ?>, 0); height: 100%");
+            
+            var fillTimeline = anime.timeline({                
+                duration: 1500,
+                easing: 'easeInOutSine'
+            });
+            
+            fillTimeline 
+                .add({
+                    targets: '.owlpath',
+                    strokeDashoffset: [anime.setDashoffset, 0],
+                    stroke: [{value:'rgba( <?php echo $red1 ?>, <?php echo $green1 ?>, <?php echo $blue1 ?>, 1)'}                        
+                      ],
+                    offset: 0
+                })
+                .add({
+                    targets: '.owlpath',                    
+                    fill: [{value: 'rgba( <?php echo $red1 ?>, <?php echo $green1 ?>, <?php echo $blue1 ?>, 1)'}],                     
+                    offset: 1500
+                })
+                .add({
+                    targets: '.eyewhite', 
+                    stroke: [{value:'rgba( <?php echo $red2 ?>, <?php echo $green2 ?>, <?php echo $blue2 ?>, 1)'}                        
+                      ],
+                    strokeDashoffset: [anime.setDashoffset, 0],                                       
+                    offset: 3000
+                })
+                .add({
+                    targets: '.eyewhite',                    
+                    fill: [{value:'rgba( <?php echo $red2 ?>, <?php echo $green2 ?>, <?php echo $blue2 ?>, 1)'}                        
+                      ],                    
+                    offset: 4500
+                })
+                .add({
+                    targets: '.eyeblack',
+                    strokeDashoffset: [anime.setDashoffset, 0], 
+                    stroke: [{value:'rgba( <?php echo $red3 ?>, <?php echo $green3 ?>, <?php echo $blue3 ?>, 1)'}                        
+                      ],
+                    offset: 6000
+                })
+                .add({
+                    targets: '.eyeblack',                    
+                    fill: [{value:'rgba( <?php echo $red3 ?>, <?php echo $green3 ?>, <?php echo $blue3 ?>, 1)'}                        
+                      ],
+                    offset: 7500
+                })
+                .add({
+                    targets: '.beak', 
+                    strokeDashoffset: [anime.setDashoffset, 0],
+                    stroke: [{value:'rgba( <?php echo $red3 ?>, <?php echo $green3 ?>, <?php echo $blue3 ?>, 1)'}                        
+                      ],
+                    offset: 9000
+                })
+                .add({
+                    targets: '.beak',                     
+                    fill: [{value:'rgba( <?php echo $red3 ?>, <?php echo $green3 ?>, <?php echo $blue3 ?>, 1)'}                        
+                      ],
+                    offset: 10500
+                })
+                .add({
+                    targets: '.foot',
+                    stroke: [{value:'rgba( <?php echo $red3 ?>, <?php echo $green3 ?>, <?php echo $blue3 ?>, 1)'}                        
+                      ],
+                    strokeDashoffset: [anime.setDashoffset, 0],                    
+                    offset: 12000
+                })
+                .add({
+                    targets: '.foot',                    
+                    fill: [{value:'rgba( <?php echo $red3 ?>, <?php echo $green3 ?>, <?php echo $blue3 ?>, 1)'}                        
+                      ],
+                    offset: 13500
+                });
+            
         }
         
     </script>    

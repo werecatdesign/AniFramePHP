@@ -9,7 +9,7 @@
         <div class = "container">
             <br><br><br>
             <div class = "uploadbox" style ="background-color: #ffffff">
-                <h2>Google Cloud Vision API</h2>
+                <h2>AniFrame - The Animated Digital Picture Frame</h2>
                 <br>
                 <form action = "check.php" method="post" enctype ="multipart/form-data">
                     <input type = "file" name = "image" accept="image/*" class = "form-control">

@@ -1,6 +1,7 @@
 body, html {
     height: 100vh;
     margin: auto;
+    overflow: hidden;
 }
 
 .bg {
@@ -20,10 +21,17 @@ svg {
     margin: auto;
 }
 
-#joygraphic, #neutralgraphic {
-    fill: none;    
-    stroke-width: 2vh;
+#joygraphic, #neutralgraphic {    
     visibility: hidden;
+}
+
+#joygraphic {
+    stroke-width: 2vh;
+    fill: none;
+}
+
+#neutralgraphic {
+    stroke-width: 0.5vh;
 }
 
 #angergraphic, #neutralgraphic {
