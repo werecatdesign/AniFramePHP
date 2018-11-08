@@ -16,4 +16,5 @@
                 <path class="motionpath" id = "path5" fill="none" stroke="#none" stroke-width="5px" d= "M-1000,1000 -100,0"></path>
                 <path class="motionpath" id = "path6" fill="none" stroke="#none" stroke-width="5px" d= "M-1000,-1000 -100,0"></path>
             </g>
+            
         </svg>

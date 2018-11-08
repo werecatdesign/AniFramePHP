@@ -1,5 +1,31 @@
         <svg id = "sorrowgraphic" x="0px" y="0px" viewBox="0 0 1560.2 878.2">
             <g>
+                <path class = "rainline" stroke = "rgba( <?php echo $red3 ?>, <?php echo $green3 ?>, <?php echo $blue3 ?>, 0)" d = "M100,200 0,500"></path>
+                <path class = "rainline" stroke = "rgba( <?php echo $red3 ?>, <?php echo $green3 ?>, <?php echo $blue3 ?>, 0)" d = "M200,200 100,500"></path>
+                <path class = "rainline" stroke = "rgba( <?php echo $red3 ?>, <?php echo $green3 ?>, <?php echo $blue3 ?>, 0)" d = "M300,200 200,500"></path>
+                <path class = "rainline" stroke = "rgba( <?php echo $red3 ?>, <?php echo $green3 ?>, <?php echo $blue3 ?>, 0)" d = "M700,200 600,500"></path>
+                <path class = "rainline" stroke = "rgba( <?php echo $red3 ?>, <?php echo $green3 ?>, <?php echo $blue3 ?>, 0)" d = "M800,200 700,500"></path>
+                <path class = "rainline" stroke = "rgba( <?php echo $red3 ?>, <?php echo $green3 ?>, <?php echo $blue3 ?>, 0)" d = "M900,200 800,500"></path>
+                <path class = "rainline" stroke = "rgba( <?php echo $red3 ?>, <?php echo $green3 ?>, <?php echo $blue3 ?>, 0)" d = "M1300,200 1200,500"></path>
+                <path class = "rainline" stroke = "rgba( <?php echo $red3 ?>, <?php echo $green3 ?>, <?php echo $blue3 ?>, 0)" d = "M1400,200 1300,500"></path>
+                <path class = "rainline" stroke = "rgba( <?php echo $red3 ?>, <?php echo $green3 ?>, <?php echo $blue3 ?>, 0)" d = "M1500,200 1400,500"></path>
+                <path class = "rainline" stroke = "rgba( <?php echo $red3 ?>, <?php echo $green3 ?>, <?php echo $blue3 ?>, 0)" d = "M375,500 275,800"></path>
+                <path class = "rainline" stroke = "rgba( <?php echo $red3 ?>, <?php echo $green3 ?>, <?php echo $blue3 ?>, 0)" d = "M475,500 375,800"></path>
+                <path class = "rainline" stroke = "rgba( <?php echo $red3 ?>, <?php echo $green3 ?>, <?php echo $blue3 ?>, 0)" d = "M575,500 475,800"></path>
+                <path class = "rainline" stroke = "rgba( <?php echo $red3 ?>, <?php echo $green3 ?>, <?php echo $blue3 ?>, 0)" d = "M1000,500 900,800"></path>
+                <path class = "rainline" stroke = "rgba( <?php echo $red3 ?>, <?php echo $green3 ?>, <?php echo $blue3 ?>, 0)" d = "M1100,500 1000,800"></path>
+                <path class = "rainline" stroke = "rgba( <?php echo $red3 ?>, <?php echo $green3 ?>, <?php echo $blue3 ?>, 0)" d = "M1200,500 1100,800"></path>
+                <path class = "rainline" stroke = "rgba( <?php echo $red3 ?>, <?php echo $green3 ?>, <?php echo $blue3 ?>, 0)" d = "M100,800 0,1100"></path>
+                <path class = "rainline" stroke = "rgba( <?php echo $red3 ?>, <?php echo $green3 ?>, <?php echo $blue3 ?>, 0)" d = "M200,800 100,1100"></path>
+                <path class = "rainline" stroke = "rgba( <?php echo $red3 ?>, <?php echo $green3 ?>, <?php echo $blue3 ?>, 0)" d = "M300,800 200,1100"></path>
+                <path class = "rainline" stroke = "rgba( <?php echo $red3 ?>, <?php echo $green3 ?>, <?php echo $blue3 ?>, 0)" d = "M700,800 600,1100"></path>
+                <path class = "rainline" stroke = "rgba( <?php echo $red3 ?>, <?php echo $green3 ?>, <?php echo $blue3 ?>, 0)" d = "M800,800 700,1100"></path>
+                <path class = "rainline" stroke = "rgba( <?php echo $red3 ?>, <?php echo $green3 ?>, <?php echo $blue3 ?>, 0)" d = "M900,800 800,1100"></path>
+                <path class = "rainline" stroke = "rgba( <?php echo $red3 ?>, <?php echo $green3 ?>, <?php echo $blue3 ?>, 0)" d = "M1300,800 1200,1100"></path>
+                <path class = "rainline" stroke = "rgba( <?php echo $red3 ?>, <?php echo $green3 ?>, <?php echo $blue3 ?>, 0)" d = "M1400,800 1300,1100"></path>
+                <path class = "rainline" stroke = "rgba( <?php echo $red3 ?>, <?php echo $green3 ?>, <?php echo $blue3 ?>, 0)" d = "M1500,800 1400,1100"></path>
+            </g>
+            <g>
                 <path class="cloudleft" d="M102.3,51.6c0,0-38.5-30-67.2,0.9c-27.5,29.6-0.6,65-0.6,65S-6.9,117.1,1,169.4c7.6,50.3,51.6,29.8,51.6,29.8
                     s-16.6,44.5,19.2,57c49,17.1,61.5-22.9,61.5-22.9s0,38.7,52.9,32.9c39.6-4.4,38.5-37.2,38.5-37.2s21.4,40.7,63.5,16.5
                     c31.1-17.9,13.9-50.3,13.9-50.3s42.1,29.5,56.9-17.9c11.9-37.9-27.8-44.6-27.8-44.6s37.7-15,18.5-55.3c-21.9-46-64.9-16.5-64.9-16.5
@@ -38,4 +64,5 @@
                 <path class="motionpath" id = "pathleft" fill="none" stroke="none" stroke-width="5px" d= "M-1500,0 0,0"></path>
                 <path class="motionpath" id = "pathright" fill="none" stroke="none" stroke-width="5px" d= "M1500,0 0,0"></path>
             </g>
+            
         </svg>

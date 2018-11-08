@@ -25,9 +25,17 @@ svg {
     visibility: hidden;
 }
 
-#joygraphic {
+#joygraphic .branch {
     stroke-width: 2vh;
     fill: none;
+}
+
+#joygraphic .leaf {
+    stroke: none;
+}
+
+#sorrowgraphic .rainline {
+    stroke-dasharray: 10;
 }
 
 #neutralgraphic {
