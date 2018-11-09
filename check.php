@@ -1,6 +1,6 @@
 <?php
 
-        /*session_start(); // starts a new session
+        session_start(); // starts a new session
     
         require "vendor/autoload.php"; // Connect to autoload.php package - It is a package from composer that specifies that a class is only loaded when                                   it is needed. Instead of specifying all the classes on top of the script, so they will be loaded at each                                         request.
     
@@ -16,15 +16,32 @@
 
         $image = $vision->image($photo, ['FACE_DETECTION', 'IMAGE_PROPERTIES']); // enter the parameters that should be analysed from the photo
         $result = $vision->annotate($image); // Creates the array with all the results from the API request
-
-        //var_dump($result); // show the result on the php page_
-        //echo '<pre>';
-        // print_r ($result); // prints the array on the php page
-        //echo '</pre>';
-    
+        
         if ($result) { // if the array has been created
             $imagetoken = "yourimage"; // The filename that shall be used for the uploaded image
-            move_uploaded_file($_FILES['image']['tmp_name'], __DIR__ . '/uploads/' . $imagetoken . ".jpg"); // the image is moved from its current                                                                                                          temporary location via the upload form to                                                                                                    the uploads folder and receives the name                                                                                                      "yourimage.jpg"
+            
+            
+            $target_dir = "uploads/";
+            $target_file = $target_dir . "yourimage" . ".JPG";
+            $uploadOk = 1;        
+            $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+
+            // Existing files are overwritten 
+
+            // Allow certain file formats
+            if($imageFileType != "jpg") {
+                echo "<p>Sorry, only JPG files are allowed.</p>";
+                $uploadOk = 0;
+            }
+
+            // Check if $uploadOk is set to 0 by an error
+            if ($uploadOk == 0) {
+                echo "<p>Sorry, your file was not uploaded.</p>";
+                // if everything is ok, try to upload file
+            } else {
+               move_uploaded_file($_FILES['image']['tmp_name'], __DIR__ . '/uploads/' . $imagetoken . ".jpg");
+            }
+            
         } else {
             header("location: index.php"); // back to the first page
             die(); // The die is the same thing as the exit() function. Between the parentheses you could also write a message to be printed.
@@ -68,13 +85,8 @@
             }
             
         }
-        
-        echo $joyCount . '<br>';
-        echo $angerCount . '<br>';
-        echo $sorrowCount . '<br>';
-        
-        $dominantEmotion = 'TEST';
-        
+                      
+            
         if($joyCount == $sorrowCount and $joyCount == $angerCount and $sorrowCount == $angerCount){
             $dominantEmotion = 'NEUTRAL';
         }
@@ -90,7 +102,7 @@
             $dominantEmotion = 'NEUTRAL';
         }
 
-        echo 'Dominant Emotion: ' . $dominantEmotion . '<br>';
+        //echo 'Dominant Emotion: ' . $dominantEmotion . '<br>';
 
         $properties = $result->imageProperties();
 
@@ -104,49 +116,7 @@
         
         $red3 = $properties->info()['dominantColors']['colors'][2]['color']['red'];
         $green3 = $properties->info()['dominantColors']['colors'][2]['color']['green'];
-        $blue3 = $properties->info()['dominantColors']['colors'][2]['color']['blue'];*/
-
-        // Since my Google Vision API project is disabled at the moment, I am using these values for the variables until it gets reactivated or I create a new project
-
-        $photo = fopen($_FILES['image']['tmp_name'], 'r');
-        $imagetoken = "yourimage";
-
-        $target_dir = "uploads/";
-        $target_file = $target_dir . "yourimage" . ".JPG";
-        $uploadOk = 1;        
-        $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
-
-        // Existing files are overwritten   
-
-        
-        // Allow certain file formats
-        if($imageFileType != "jpg") {
-            echo "<p>Sorry, only JPG files are allowed.</p>";
-            $uploadOk = 0;
-        }
-
-        // Check if $uploadOk is set to 0 by an error
-        if ($uploadOk == 0) {
-            echo "<p>Sorry, your file was not uploaded.</p>";
-            // if everything is ok, try to upload file
-        } else {
-            move_uploaded_file($_FILES['image']['tmp_name'], __DIR__ . '/uploads/' . $imagetoken . ".jpg");
-        }
-        
-
-        $dominantEmotion = "JOY";
-
-        $red1 = 255;
-        $green1 = 0;
-        $blue1 = 0;
-
-        $red2 = 0;
-        $green2 = 0;
-        $blue2 = 255;
-
-        $red3 = 0;
-        $green3 = 255;
-        $blue3 = 0;
+        $blue3 = $properties->info()['dominantColors']['colors'][2]['color']['blue'];
 
 ?>
 
@@ -214,7 +184,7 @@
                 } else {
                     include "neutralanim.php";
                 }                
-            ?> 
+        ?> 
 
         
     </script>    

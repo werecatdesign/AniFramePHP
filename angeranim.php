@@ -63,9 +63,7 @@
                   duration: lineTime,                  
                   elasticity: 2000,
                   loop: false
-                });
-
-       
+                });       
 
 
         image.addEventListener("mouseover", function(){
